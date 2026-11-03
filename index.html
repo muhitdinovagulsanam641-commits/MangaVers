@@ -1,529 +1,314 @@
-
-
 <!DOCTYPE html>
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MangaVerse</title>
-
+<title>MangaVerse — Manga olami</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#090b14;color:#fff;font-family:Arial,sans-serif}
+:root{--bg:#080b14;--panel:#151b2b;--panel2:#202a40;--pink:#ff3864;--text:#f7f8fc;--muted:#aeb8ce;--line:#303a50}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}
 button,input,textarea,select{font:inherit}
 button{cursor:pointer;border:0}
-header{height:75px;background:#111522;padding:0 5%;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;border-bottom:1px solid #252b3c}
-.logo{font-size:27px;font-weight:bold;color:#ff4167}
-nav{display:flex;align-items:center;gap:20px}
-nav a{color:white;text-decoration:none;cursor:pointer;font-size:14px}
-nav a:hover{color:#ff4167}
-.lang,.admin-btn{background:#ff4167;color:white;padding:10px 14px;border-radius:8px}
-.hero{padding:90px 5%;background:linear-gradient(120deg,#28152e,#172544);min-height:300px}
-.hero h1{font-size:42px;margin-bottom:15px}
-.hero p{color:#c4c8d5;margin-bottom:25px}
-.primary{background:#ff4167;color:white;padding:13px 20px;border-radius:9px;font-weight:bold}
-.primary:hover{background:#e92c55}
-.container{padding:30px 5%}
-.search{width:100%;padding:16px;background:#191f30;border:1px solid #343b4e;border-radius:10px;color:white;margin-bottom:25px;outline:none}
-.search:focus{border-color:#ff4167}
-h2{margin:25px 0 18px}
-.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:30px}
-.filter{background:#252d40;color:white;padding:11px 19px;border-radius:8px}
-.filter.active,.filter:hover{background:#ff4167}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:20px}
-.card{background:#191f30;border-radius:12px;overflow:hidden;position:relative;transition:.25s}
-.card:hover{transform:translateY(-5px)}
-.cover{height:245px;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;font-size:25px;font-weight:bold;position:relative;overflow:hidden;background:linear-gradient(135deg,#40265f,#151b35)}
-.cover:before{content:"";position:absolute;width:180px;height:180px;border:2px solid #ffffff25;border-radius:50%;top:-60px;right:-45px}
-.cover:after{content:"MANGAVERSE";position:absolute;bottom:13px;left:0;right:0;font-size:10px;letter-spacing:5px;color:#ffffff90}
-.cover span{position:relative;z-index:1;text-shadow:0 3px 12px #000}
-.blue{background:linear-gradient(135deg,#20647d,#15243e)}
-.orange{background:linear-gradient(135deg,#ad5728,#3a2025)}
-.red{background:linear-gradient(135deg,#80324e,#21172c)}
-.gray{background:linear-gradient(135deg,#575248,#171923)}
-.green{background:linear-gradient(135deg,#236c55,#152b32)}
-.purple{background:linear-gradient(135deg,#633b9b,#1d1737)}
-.pink{background:linear-gradient(135deg,#a84e80,#321c43)}
-.cover img{position:absolute;width:100%;height:100%;object-fit:cover;inset:0}
-.card-info{padding:15px}
-.card-info h3{margin-bottom:8px;font-size:17px}
-.card-info p{font-size:13px;color:#aeb6c8}
-.heart{position:absolute;right:10px;top:10px;background:#090b14;color:white;border-radius:50%;width:39px;height:39px;font-size:22px;z-index:2}
-.heart.active{color:#ff4167}
-.details{width:100%;background:#ff4167;color:white;padding:11px;border-radius:7px;margin-top:13px}
-.empty{color:#aeb6c8;padding:20px 0}
-.section-title{display:flex;justify-content:space-between;align-items:center}
-.modal{display:none;position:fixed;inset:0;background:#000d;z-index:30;justify-content:center;align-items:center;padding:15px}
-.modal-content{background:#171d2c;padding:25px;border-radius:15px;width:100%;max-width:570px;max-height:90vh;overflow-y:auto}
-.close{float:right;background:none;color:#ff5575;font-size:28px}
-.modal-content p{color:#c2c7d3;line-height:1.7;margin:12px 0}
-.chapter{width:100%;padding:13px;margin-top:9px;background:#252d40;color:white;border-radius:8px;text-align:left}
-.chapter:hover{background:#ff4167}
-.reader-image{width:100%;max-height:550px;object-fit:contain;background:#222;border-radius:10px;margin:20px 0}
-.reader-placeholder{height:350px;background:linear-gradient(135deg,#242b40,#111522);display:flex;align-items:center;justify-content:center;text-align:center;border-radius:10px;margin:20px 0;padding:25px;color:#c5c9d4}
-.reader-controls{display:flex;justify-content:space-between;gap:10px}
-.reader-controls button{flex:1}
-.admin-form{display:flex;flex-direction:column;gap:12px;margin-top:20px}
-.admin-form input,.admin-form textarea,.admin-form select{width:100%;padding:13px;background:#252d40;color:white;border:1px solid #42495c;border-radius:8px}
-.admin-form textarea{min-height:90px;resize:vertical}
-.admin-form label{font-size:13px;color:#c4c8d5}
-footer{background:#111522;padding:40px 5%;text-align:center;color:#aeb6c8;margin-top:50px}
-footer h2{color:#ff4167}
+header{height:68px;padding:0 4%;display:flex;align-items:center;justify-content:space-between;background:#111625;position:sticky;top:0;z-index:20;border-bottom:1px solid #242c3d}
+.logo{font-size:27px;font-weight:800;color:var(--pink);letter-spacing:-1px}
+nav{display:flex;gap:22px;align-items:center}
+nav a{color:var(--text);text-decoration:none;font-size:14px}
+nav a:hover{color:var(--pink)}
+.btn{background:var(--pink);color:white;padding:11px 16px;border-radius:10px;font-weight:700}
+.btn:hover{filter:brightness(1.1)}
+.btn.secondary{background:var(--panel2)}
+.btn.small{padding:8px 12px;font-size:13px}
+.hero{padding:78px 4%;min-height:300px;background:linear-gradient(115deg,#24152f,#172746);display:flex;align-items:center}
+.hero h1{font-size:clamp(30px,4vw,48px);margin:0 0 14px}
+.hero p{color:#d2d9e8;margin:0 0 24px}
+main{padding:26px 4% 70px}
+.searchbar{width:100%;padding:15px 18px;background:#171e2e;border:1px solid var(--line);border-radius:12px;color:white;outline:none;margin:0 0 32px}
+.searchbar:focus,input:focus,textarea:focus,select:focus{border-color:var(--pink)}
+.section-title{font-size:22px;margin:34px 0 18px}
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:32px}
+.filter{background:#222b3e;color:#fff;padding:10px 16px;border-radius:9px}
+.filter.active,.filter:hover{background:var(--pink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:18px}
+.card{background:var(--panel);border:1px solid transparent;border-radius:13px;overflow:hidden;position:relative;transition:.2s}
+.card:hover{transform:translateY(-4px);border-color:#46516a}
+.cover{height:230px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:18px;text-align:center}
+.cover:before,.cover:after{content:"";position:absolute;border:2px solid #ffffff25;border-radius:50%;width:190px;height:190px;right:-45px;top:-65px}
+.cover:after{width:130px;height:130px;right:auto;left:-55px;top:auto;bottom:-55px}
+.cover-title{position:relative;z-index:1;font-size:25px;font-weight:900;text-shadow:0 3px 8px #0008;line-height:1.15}
+.cover-symbol{position:absolute;bottom:12px;right:14px;font-size:36px;opacity:.3}
+.favorite{position:absolute;right:10px;top:10px;width:36px;height:36px;border-radius:50%;background:#080b14;color:white;font-size:19px;z-index:3}
+.favorite.on{color:#ff3864}
+.card-info{padding:13px 14px 16px}
+.card-info h3{font-size:16px;margin:0 0 6px}
+.card-info p{margin:0;color:var(--muted);font-size:13px}
+.card-actions{display:flex;gap:8px;margin-top:12px}
+.empty{color:var(--muted);padding:24px 0}
+footer{border-top:1px solid var(--line);padding:25px 4%;color:var(--muted);text-align:center;font-size:13px}
+.modal-backdrop{position:fixed;inset:0;background:#000b;display:none;align-items:center;justify-content:center;padding:18px;z-index:50}
+.modal-backdrop.show{display:flex}
+.modal{background:#121a2a;border:1px solid var(--line);border-radius:16px;width:min(720px,100%);max-height:90vh;overflow:auto;padding:24px;position:relative}
+.close{position:absolute;right:15px;top:12px;background:transparent;color:white;font-size:26px}
+.modal h2{margin:0 36px 12px 0}
+.modal p{color:#d0d8e8;line-height:1.6}
+.modal-grid{display:grid;grid-template-columns:180px 1fr;gap:20px}
+.modal-cover{min-height:230px;border-radius:12px;display:flex;align-items:center;justify-content:center;text-align:center;padding:14px;font-weight:900;font-size:22px}
+.chapter-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chapter{background:var(--panel2);color:white;padding:9px 12px;border-radius:8px}
+.chapter:hover{background:var(--pink)}
+.reader-page{background:#f4f0e8;color:#222;border-radius:10px;padding:28px;min-height:220px;line-height:1.8;margin:18px 0}
+.reader-controls{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field{display:flex;flex-direction:column;gap:6px;margin:10px 0}
+.field label{font-size:13px;color:var(--muted)}
+.field input,.field textarea,.field select{background:#0c1220;border:1px solid var(--line);border-radius:8px;padding:11px;color:white;width:100%}
+.field textarea{min-height:90px;resize:vertical}
+.admin-note{font-size:12px;color:#f5c979;line-height:1.5}
+.hidden{display:none!important}
 @media(max-width:650px){
-header{height:auto;padding:17px 5%;flex-wrap:wrap;gap:15px}
-nav{gap:12px;flex-wrap:wrap}
-nav a{font-size:12px}
-.hero{padding:65px 5%}
-.hero h1{font-size:30px}
-.cover{height:210px}
-.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.card-info{padding:11px}
-.card-info h3{font-size:14px}
+ header{height:auto;min-height:64px;padding:12px 4%;align-items:flex-start;gap:12px}
+ nav{gap:10px;flex-wrap:wrap;justify-content:flex-end}
+ nav a{font-size:12px}
+ .hero{padding:55px 5%;min-height:260px}
+ main{padding:20px 4% 50px}
+ .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+ .cover{height:190px}.cover-title{font-size:20px}
+ .modal-grid{grid-template-columns:1fr}
+ .modal-cover{min-height:150px}
+ .form-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
-
 <body>
-
 <header>
-<div class="logo">MangaVerse.</div>
-<nav>
-<a onclick="goHome()" data-i="home">Bosh sahifa</a>
-<a onclick="scrollManga()" data-i="manga">Manga</a>
-<a onclick="scrollGenres()" data-i="genres">Janrlar</a>
-<a onclick="showFavorites()" data-i="favorites">Sevimlilar</a>
-<button class="lang" onclick="changeLang()">EN</button>
-<button class="admin-btn" onclick="openAdmin()">⚙ Admin</button>
-</nav>
+  <div class="logo">MangaVerse.</div>
+  <nav>
+    <a href="#home" data-i18n="home">Bosh sahifa</a>
+    <a href="#manga" data-i18n="manga">Manga</a>
+    <a href="#genres" data-i18n="genres">Janrlar</a>
+    <a href="#favorites" data-i18n="favorites">Sevimlilar</a>
+    <button class="btn small" id="langBtn" type="button">EN</button>
+    <button class="btn small" id="adminBtn" type="button" data-i18n="admin">⚙ Admin</button>
+  </nav>
 </header>
 
 <section class="hero" id="home">
-<h1 data-i="welcome">Manga olamiga xush kelibsiz!</h1>
-<p data-i="subtitle">Eng yaxshi mangalarni bir joyda kashf eting.</p>
-<button class="primary" onclick="scrollManga()" data-i="explore">Manga ko'rish →</button>
+  <div>
+    <h1 data-i18n="welcome">Manga olamiga xush kelibsiz!</h1>
+    <p data-i18n="subtitle">Eng yaxshi mangalarni bir joyda kashf eting.</p>
+    <button class="btn" id="browseBtn" data-i18n="browse">Manga ko‘rish →</button>
+  </div>
 </section>
 
-<main class="container" id="mangas">
+<main id="manga">
+  <input class="searchbar" id="searchInput" type="search" placeholder="🔎 Manga qidirish..." aria-label="Search manga">
+  <h2 class="section-title" id="genres" data-i18n="genresTitle">Janrlar</h2>
+  <div class="filters" id="filters"></div>
 
-<input class="search" id="search"
-placeholder="🔎 Manga qidirish..."
-oninput="render()">
+  <h2 class="section-title" data-i18n="popular">🔥 Mashhur mangalar</h2>
+  <div class="grid" id="mangaGrid"></div>
 
-<h2 data-i="genres" id="genreHeading">Janrlar</h2>
-
-<div class="filters" id="genres">
-<button class="filter active" onclick="setGenre('all',this)" data-i="all">Barchasi</button>
-<button class="filter" onclick="setGenre('Action',this)">Action</button>
-<button class="filter" onclick="setGenre('Fantasy',this)">Fantasy</button>
-<button class="filter" onclick="setGenre('Romance',this)">Romance</button>
-<button class="filter" onclick="setGenre('Adventure',this)">Adventure</button>
-<button class="filter" onclick="setGenre('Mystery',this)">Mystery</button>
-</div>
-
-<div class="section-title">
-<h2 id="sectionTitle">🔥 Mashhur mangalar</h2>
-</div>
-
-<div class="grid" id="grid"></div>
-
+  <h2 class="section-title" id="favorites" data-i18n="favoriteTitle">❤️ Sevimli mangalar</h2>
+  <div class="grid" id="favoriteGrid"></div>
+  <p class="empty hidden" id="noFavorites" data-i18n="noFavorites">Hali sevimlilar yo‘q. Yurak belgisini bosing.</p>
 </main>
 
-<div class="modal" id="modal" onclick="outsideClose(event)">
-<div class="modal-content">
-<button class="close" onclick="closeModal()">×</button>
-<div id="modalBody"></div>
-</div>
-</div>
-
 <footer>
-<h2>MangaVerse.</h2>
-<p>© 2026 MangaVerse</p>
-<p data-i="footer">Manga olamini biz bilan kashf eting!</p>
+  <span>MangaVerse.</span> — <span data-i18n="footer">Manga ixlosmandlari uchun yaratilgan kichik loyiha.</span>
 </footer>
 
+<div class="modal-backdrop" id="detailModal">
+  <div class="modal">
+    <button class="close" data-close="detailModal" aria-label="Close">×</button>
+    <div id="detailContent"></div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="readerModal">
+  <div class="modal">
+    <button class="close" data-close="readerModal" aria-label="Close">×</button>
+    <h2 id="readerTitle">Chapter 1</h2>
+    <div class="reader-page" id="readerText"></div>
+    <div class="reader-controls">
+      <button class="btn secondary" id="prevPage">← <span data-i18n="previous">Oldingi</span></button>
+      <span id="pageNumber">1 / 3</span>
+      <button class="btn" id="nextPage"><span data-i18n="next">Keyingi</span> →</button>
+    </div>
+    <p class="admin-note" data-i18n="readerNote">Bu sahifada namuna matnlar berilgan; mualliflik huquqi bilan himoyalangan manga sahifalari joylanmagan.</p>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="adminModal">
+  <div class="modal">
+    <button class="close" data-close="adminModal" aria-label="Close">×</button>
+    <h2 data-i18n="adminTitle">Admin panel — manga qo‘shish</h2>
+    <p class="admin-note" data-i18n="adminNote">Demo admin panel: qo‘shilgan ma’lumotlar faqat shu brauzerda saqlanadi. Bu haqiqiy himoyalangan boshqaruv tizimi emas.</p>
+    <form id="addForm">
+      <div class="form-grid">
+        <div class="field"><label data-i18n="titleLabel">Manga nomi</label><input id="newTitle" required maxlength="60"></div>
+        <div class="field"><label data-i18n="genreLabel">Janr</label>
+          <select id="newGenre"><option>Adventure</option><option>Action</option><option>Fantasy</option><option>Romance</option><option>Mystery</option><option>Comedy</option></select>
+        </div>
+      </div>
+      <div class="field"><label data-i18n="descLabel">Qisqacha tavsif</label><textarea id="newDesc" required maxlength="500"></textarea></div>
+      <div class="field"><label data-i18n="coverLabel">Muqova rasmi URL manzili (ixtiyoriy)</label><input id="newCover" type="url" placeholder="https://..."></div>
+      <button class="btn" type="submit" data-i18n="addButton">Manga qo‘shish</button>
+    </form>
+    <div id="adminList"></div>
+  </div>
+</div>
+
 <script>
-
-// TRANSLATIONS
-
-const words={
-uz:{
-home:"Bosh sahifa",manga:"Manga",genres:"Janrlar",
-favorites:"Sevimlilar",welcome:"Manga olamiga xush kelibsiz!",
-subtitle:"Eng yaxshi mangalarni bir joyda kashf eting.",
-explore:"Manga ko'rish →",all:"Barchasi",
-popular:"🔥 Mashhur mangalar",favTitle:"❤️ Sevimli mangalar",
-search:"🔎 Manga qidirish...",author:"Muallif",
-description:"Tavsif",chapters:"Qismlar",
-details:"Batafsil ko'rish",empty:"Manga topilmadi.",
-emptyFav:"Sevimli mangalar hali yo'q.",
-close:"Yopish",previous:"← Oldingi",next:"Keyingi →",
-page:"Sahifa",chapter:"Qism",
-footer:"Manga olamini biz bilan kashf eting!",
-reader:"Manga o'qish"
-},
-en:{
-home:"Home",manga:"Manga",genres:"Genres",
-favorites:"Favorites",welcome:"Welcome to MangaVerse!",
-subtitle:"Discover the best manga in one place.",
-explore:"Explore Manga →",all:"All",
-popular:"🔥 Popular Manga",favTitle:"❤️ Favorite Manga",
-search:"🔎 Search manga...",author:"Author",
-description:"Description",chapters:"Chapters",
-details:"View details",empty:"No manga found.",
-emptyFav:"No favorites yet.",
-close:"Close",previous:"← Previous",next:"Next →",
-page:"Page",chapter:"Chapter",
-footer:"Discover the world of manga with us!",
-reader:"Read manga"
-}
+const translations = {
+  uz:{
+    home:"Bosh sahifa",manga:"Manga",genres:"Janrlar",favorites:"Sevimlilar",admin:"⚙ Admin",
+    welcome:"Manga olamiga xush kelibsiz!",subtitle:"Eng yaxshi mangalarni bir joyda kashf eting.",browse:"Manga ko‘rish →",
+    genresTitle:"Janrlar",popular:"🔥 Mashhur mangalar",favoriteTitle:"❤️ Sevimli mangalar",
+    noFavorites:"Hali sevimlilar yo‘q. Yurak belgisini bosing.",footer:"Manga ixlosmandlari uchun yaratilgan kichik loyiha.",
+    search:"🔎 Manga qidirish...",all:"Barchasi",details:"Batafsil",chapters:"Boblar",author:"Muallif",
+    previous:"Oldingi",next:"Keyingi",readerNote:"Bu sahifada namuna matnlar berilgan; mualliflik huquqi bilan himoyalangan manga sahifalari joylanmagan.",
+    adminTitle:"Admin panel — manga qo‘shish",adminNote:"Demo admin panel: qo‘shilgan ma’lumotlar faqat shu brauzerda saqlanadi. Bu haqiqiy himoyalangan boshqaruv tizimi emas.",
+    titleLabel:"Manga nomi",genreLabel:"Janr",descLabel:"Qisqacha tavsif",coverLabel:"Muqova rasmi URL manzili (ixtiyoriy)",
+    addButton:"Manga qo‘shish",added:"Manga muvaffaqiyatli qo‘shildi!",remove:"O‘chirish",empty:"Hech narsa topilmadi.",
+    chapter:"Bob",demo:"Namuna bob",saved:"Sevimlilarga qo‘shildi",unsaved:"Sevimlilardan olib tashlandi"
+  },
+  en:{
+    home:"Home",manga:"Manga",genres:"Genres",favorites:"Favorites",admin:"⚙ Admin",
+    welcome:"Welcome to the world of manga!",subtitle:"Discover great manga in one place.",browse:"Explore manga →",
+    genresTitle:"Genres",popular:"🔥 Popular manga",favoriteTitle:"❤️ Your favorites",
+    noFavorites:"No favorites yet. Tap the heart icon.",footer:"A small project made for manga fans.",
+    search:"🔎 Search manga...",all:"All",details:"Details",chapters:"Chapters",author:"Author",
+    previous:"Previous",next:"Next",readerNote:"These are sample reading pages; copyrighted manga pages are not uploaded here.",
+    adminTitle:"Admin panel — add manga",adminNote:"Demo admin panel: added items are saved only in this browser. This is not a secure real admin system.",
+    titleLabel:"Manga title",genreLabel:"Genre",descLabel:"Short description",coverLabel:"Cover image URL (optional)",
+    addButton:"Add manga",added:"Manga added successfully!",remove:"Delete",empty:"No results found.",
+    chapter:"Chapter",demo:"Sample chapter",saved:"Added to favorites",unsaved:"Removed from favorites"
+  }
 };
 
-// MANGA DATA
-
-const defaultMangas=[
-{id:1,name:"Solo Leveling",genre:"Action",author:"Chugong",color:"purple",chapters:10,uz:"Sung Jin-Woo oddiy ovchidan kuchli qahramonga aylanish yo'lida yangi sinovlarga duch keladi.",en:"Sung Jin-Woo faces new challenges as he grows from an ordinary hunter into a powerful hero.",cover:"",pages:[]},
-{id:2,name:"One Piece",genre:"Adventure",author:"Eiichiro Oda",color:"blue",chapters:12,uz:"Luffy va uning do'stlari buyuk xazinani topish uchun dengizlarga yo'l olishadi.",en:"Luffy and his friends travel across the seas in search of a legendary treasure.",cover:"",pages:[]},
-{id:3,name:"Naruto",genre:"Action",author:"Masashi Kishimoto",color:"orange",chapters:15,uz:"Naruto kuchli ninja bo'lish va orzusiga erishish uchun tinimsiz harakat qiladi.",en:"Naruto works hard to become a powerful ninja and achieve his dream.",cover:"",pages:[]},
-{id:4,name:"Attack on Titan",genre:"Action",author:"Hajime Isayama",color:"gray",chapters:12,uz:"Insoniyat sirli devorlar ortida yashaydi va katta jumboqlarga duch keladi.",en:"Humanity lives behind mysterious walls and faces many secrets.",cover:"",pages:[]},
-{id:5,name:"Demon Slayer",genre:"Fantasy",author:"Koyoharu Gotouge",color:"red",chapters:10,uz:"Tanjiro oilasini himoya qilish uchun qiyin safarga chiqadi.",en:"Tanjiro begins a difficult journey to protect his family.",cover:"",pages:[]},
-{id:6,name:"Your Name",genre:"Romance",author:"Makoto Shinkai",color:"pink",chapters:8,uz:"Ikki yosh inson sirli tarzda bir-birining hayotiga bog'lanib qoladi.",en:"Two young people become mysteriously connected to each other's lives.",cover:"",pages:[]},
-{id:7,name:"Spy x Family",genre:"Adventure",author:"Tatsuya Endo",color:"green",chapters:9,uz:"G'ayrioddiy oila a'zolari birga yashab, o'z sirlarini yashirishadi.",en:"An unusual family lives together while keeping their secrets.",cover:"",pages:[]},
-{id:8,name:"Death Note",genre:"Mystery",author:"Tsugumi Ohba",color:"gray",chapters:11,uz:"Sirli daftar topgan o'quvchi murakkab voqealar markaziga tushib qoladi.",en:"A student finds a mysterious notebook and enters a world of complex events.",cover:"",pages:[]},
-{id:9,name:"Haikyuu!!",genre:"Adventure",author:"Haruichi Furudate",color:"orange",chapters:10,uz:"Yosh voleybolchilar birgalikda mashq qilib, o'z orzulariga intilishadi.",en:"Young volleyball players train together to achieve their dreams.",cover:"",pages:[]},
-{id:10,name:"Dr. Stone",genre:"Fantasy",author:"Riichiro Inagaki",color:"green",chapters:8,uz:"Senku ilm-fan yordamida insoniyatni qayta tiklashga harakat qiladi.",en:"Senku uses science to help rebuild human civilization.",cover:"",pages:[]}
+const initialManga = [
+ {id:1,title:"Solo Leveling",genre:"Action",author:"Chugong",color:"#56358a",symbol:"⚔",descUz:"Oddiy ovchi kutilmagan imkoniyatga ega bo‘lib, o‘z kuchini va jasoratini kashf etadi. Hikoya mehnat, qat’iyat va o‘sish haqida.",descEn:"An ordinary hunter discovers an unexpected opportunity and learns about courage, effort, and personal growth."},
+ {id:2,title:"One Piece",genre:"Adventure",author:"Eiichiro Oda",color:"#12617b",symbol:"☠",descUz:"Do‘stlar jamoasi katta sayohatga chiqib, orzulari sari yo‘l oladi. Sarguzasht, do‘stlik va jamoaviylik asosiy mavzulardir.",descEn:"A crew of friends sets out on a great journey. Adventure, friendship, and teamwork are at the heart of the story."},
+ {id:3,title:"Naruto",genre:"Action",author:"Masashi Kishimoto",color:"#b65a25",symbol:"🍃",descUz:"Yosh ninja o‘z maqsadiga erishish uchun tinimsiz mashq qiladi va do‘stlarining qadrini anglaydi.",descEn:"A young ninja works hard toward his dream and learns the value of friendship and perseverance."},
+ {id:4,title:"Attack on Titan",genre:"Mystery",author:"Hajime Isayama",color:"#56534d",symbol:"🏰",descUz:"Sirli devorlar ortidagi dunyo va insonlarning haqiqatni izlash yo‘li haqida fantastik sirli hikoya.",descEn:"A fantasy mystery about a world behind mysterious walls and people searching for the truth."},
+ {id:5,title:"Demon Slayer",genre:"Fantasy",author:"Koyoharu Gotouge",color:"#762b50",symbol:"花",descUz:"Mehribon yigit oilasini asrash va yaqinlariga yordam berish uchun jasorat bilan yo‘lga chiqadi.",descEn:"A kind young hero begins a courageous journey to protect his family and help others."},
+ {id:6,title:"Your Name",genre:"Romance",author:"Makoto Shinkai",color:"#a84683",symbol:"☄",descUz:"Ikki yoshning hayoti sirli tarzda bog‘lanadi. Hikoya xotiralar, orzular va taqdir haqida.",descEn:"The lives of two young people become mysteriously connected. A story about memories, dreams, and destiny."},
+ {id:7,title:"Spy x Family",genre:"Comedy",author:"Tatsuya Endo",color:"#176b59",symbol:"★",descUz:"G‘ayrioddiy oila kundalik hayotda bir-birini tushunishni, ishonishni va qo‘llab-quvvatlashni o‘rganadi.",descEn:"An unusual family learns to understand, trust, and support one another in everyday life."},
+ {id:8,title:"Death Note",genre:"Mystery",author:"Tsugumi Ohba",color:"#514c46",symbol:"✦",descUz:"Sirli daftar atrofida kechadigan aql charxi va tanlovlar haqidagi fantastik detektiv hikoya.",descEn:"A fantasy detective story about clever strategies and difficult choices surrounding a mysterious notebook."}
 ];
 
-let mangas=JSON.parse(localStorage.getItem("mv_mangas")||"null")||defaultMangas;
-let favorites=JSON.parse(localStorage.getItem("mv_favorites")||"[]");
-let lang="uz";
-let genre="all";
-let favoriteMode=false;
-let currentPage=1;
-let currentManga=null;
-let currentChapter=1;
+let manga = JSON.parse(localStorage.getItem("mangaverse_items") || "null") || initialManga;
+let favorites = JSON.parse(localStorage.getItem("mangaverse_favs") || "[]");
+let lang = localStorage.getItem("mangaverse_lang") || "uz";
+let activeGenre = "All";
+let currentReaderPage = 0;
+let currentReaderManga = null;
+const $ = id => document.getElementById(id);
+const t = key => translations[lang][key] || key;
+const genres = ["All","Action","Fantasy","Romance","Adventure","Mystery","Comedy"];
 
-function t(key){return words[lang][key]}
-
-function save(){
-localStorage.setItem("mv_mangas",JSON.stringify(mangas));
-localStorage.setItem("mv_favorites",JSON.stringify(favorites));
+function saveData(){
+ localStorage.setItem("mangaverse_items",JSON.stringify(manga));
+ localStorage.setItem("mangaverse_favs",JSON.stringify(favorites));
 }
-
-// LANGUAGE
-
-function changeLang(){
-lang=lang==="uz"?"en":"uz";
-document.querySelector(".lang").textContent=lang==="uz"?"EN":"UZ";
-
-document.querySelectorAll("[data-i]").forEach(el=>{
-el.textContent=t(el.dataset.i);
+function description(item){return lang==="uz"?item.descUz:item.descEn}
+function renderFilters(){
+ $("filters").innerHTML = genres.map(g=>`<button class="filter ${activeGenre===g?"active":""}" data-genre="${g}">${g==="All"?t("all"):g}</button>`).join("");
+ document.querySelectorAll("[data-genre]").forEach(btn=>btn.addEventListener("click",()=>{activeGenre=btn.dataset.genre;renderFilters();renderManga()}));
+}
+function cardHTML(item){
+ const isFav=favorites.includes(item.id);
+ const cover=item.cover
+   ? `<div class="cover" style="background:#202a40"><img src="${escapeAttr(item.cover)}" alt="${escapeAttr(item.title)} cover" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none'"><span class="cover-title">${escapeHTML(item.title)}</span></div>`
+   : `<div class="cover" style="background:linear-gradient(145deg,${item.color||"#56358a"},#101827)"><span class="cover-title">${escapeHTML(item.title)}</span><span class="cover-symbol">${item.symbol||"✦"}</span></div>`;
+ return `<article class="card">
+   <button class="favorite ${isFav?"on":""}" data-fav="${item.id}" aria-label="Favorite">${isFav?"♥":"♡"}</button>
+   ${cover}
+   <div class="card-info"><h3>${escapeHTML(item.title)}</h3><p>${escapeHTML(item.genre)}</p>
+   <div class="card-actions"><button class="btn small" data-detail="${item.id}">${t("details")}</button></div></div>
+ </article>`;
+}
+function renderManga(){
+ const query=$("searchInput").value.trim().toLowerCase();
+ const filtered=manga.filter(item=>(activeGenre==="All"||item.genre===activeGenre)&&
+   (item.title.toLowerCase().includes(query)||item.genre.toLowerCase().includes(query)));
+ $("mangaGrid").innerHTML=filtered.length?filtered.map(cardHTML).join():`<p class="empty">${t("empty")}</p>`;
+ const favItems=manga.filter(item=>favorites.includes(item.id));
+ $("favoriteGrid").innerHTML=favItems.map(cardHTML).join();
+ $("noFavorites").classList.toggle("hidden",favItems.length>0);
+ document.querySelectorAll("[data-fav]").forEach(btn=>btn.addEventListener("click",()=>{
+   const id=Number(btn.dataset.fav);
+   favorites=favorites.includes(id)?favorites.filter(x=>x!==id):[...favorites,id];
+   saveData();renderManga();
+ }));
+ document.querySelectorAll("[data-detail]").forEach(btn=>btn.addEventListener("click",()=>showDetails(Number(btn.dataset.detail))));
+}
+function showDetails(id){
+ const item=manga.find(x=>x.id===id);if(!item)return;
+ $("detailContent").innerHTML=`<div class="modal-grid">
+ <div class="modal-cover" style="background:linear-gradient(145deg,${item.color||"#56358a"},#101827)">${escapeHTML(item.title)}</div>
+ <div><h2>${escapeHTML(item.title)}</h2><p><b>${t("author")}:</b> ${escapeHTML(item.author||"Unknown")}</p>
+ <p><b>${t("genres")}:</b> ${escapeHTML(item.genre)}</p><p>${escapeHTML(description(item))}</p>
+ <h3>${t("chapters")}</h3><div class="chapter-list">
+ <button class="chapter" data-read="1">${t("chapter")} 1</button>
+ <button class="chapter" data-read="2">${t("chapter")} 2</button>
+ <button class="chapter" data-read="3">${t("chapter")} 3</button>
+ </div></div></div>`;
+ $("detailModal").classList.add("show");
+ document.querySelectorAll("[data-read]").forEach(btn=>btn.addEventListener("click",()=>openReader(item,Number(btn.dataset.read))));
+}
+const samplePages = [
+ "Tong saharda shahar asta-sekin uyg‘onardi. Qahramonimiz bugun yangi maqsad sari ilk qadamini qo‘yishga qaror qildi. U daftarini ochib, rejasini yozdi.",
+ "Yo‘lda u yangi do‘st bilan uchrashdi. Ular bir-birini tinglashdi va muammoni birgalikda hal qilishga kelishib olishdi. Hamkorlik ularga kuch berdi.",
+ "Kun oxirida qahramonimiz kichik yutuq ham katta o‘zgarishlarning boshlanishi bo‘lishini tushundi. Ertaga esa yangi sarguzasht boshlanadi."
+];
+function openReader(item,chapter){
+ currentReaderManga=item;currentReaderPage=0;
+ $("readerTitle").textContent=`${item.title} — ${t("chapter")} ${chapter}`;
+ renderReader();$("detailModal").classList.remove("show");$("readerModal").classList.add("show");
+}
+function renderReader(){
+ $("readerText").textContent=samplePages[currentReaderPage];
+ $("pageNumber").textContent=`${currentReaderPage+1} / ${samplePages.length}`;
+ $("prevPage").disabled=currentReaderPage===0;
+ $("nextPage").disabled=currentReaderPage===samplePages.length-1;
+}
+$("prevPage").addEventListener("click",()=>{if(currentReaderPage>0){currentReaderPage--;renderReader()}});
+$("nextPage").addEventListener("click",()=>{if(currentReaderPage<samplePages.length-1){currentReaderPage++;renderReader()}});
+function openModal(id){$(id).classList.add("show")}
+document.querySelectorAll("[data-close]").forEach(btn=>btn.addEventListener("click",()=>$(btn.dataset.close).classList.remove("show")));
+document.querySelectorAll(".modal-backdrop").forEach(bg=>bg.addEventListener("click",e=>{if(e.target===bg)bg.classList.remove("show")}));
+$("searchInput").addEventListener("input",renderManga);
+$("browseBtn").addEventListener("click",()=>$("manga").scrollIntoView({behavior:"smooth"}));
+$("langBtn").addEventListener("click",()=>{lang=lang==="uz"?"en":"uz";localStorage.setItem("mangaverse_lang",lang);applyLanguage()});
+$("adminBtn").addEventListener("click",()=>{renderAdminList();openModal("adminModal")});
+$("addForm").addEventListener("submit",e=>{
+ e.preventDefault();
+ const title=$("newTitle").value.trim(),desc=$("newDesc").value.trim(),genre=$("newGenre").value,cover=$("newCover").value.trim();
+ if(!title||!desc)return;
+ const item={id:Date.now(),title,genre,author:"MangaVerse user",color:"#4d397b",symbol:"✦",
+   descUz:desc,descEn:desc,cover:cover||""};
+ manga.unshift(item);saveData();$("addForm").reset();renderManga();renderAdminList();
+ alert(t("added"));
 });
-
-document.getElementById("search").placeholder=t("search");
-render();
+function renderAdminList(){
+ $("adminList").innerHTML="<h3>"+(lang==="uz"?"Saytdagi mangalar":"Manga on this site")+"</h3>"+
+ manga.map(item=>`<p style="display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid var(--line);padding:8px 0">${escapeHTML(item.title)} <button class="btn small secondary" data-delete="${item.id}">${t("remove")}</button></p>`).join("");
+ document.querySelectorAll("[data-delete]").forEach(btn=>btn.addEventListener("click",()=>{
+  const id=Number(btn.dataset.delete);manga=manga.filter(x=>x.id!==id);favorites=favorites.filter(x=>x!==id);saveData();renderManga();renderAdminList();
+ }));
 }
-
-// NAVIGATION
-
-function scrollManga(){
-document.getElementById("mangas").scrollIntoView({behavior:"smooth"});
+function applyLanguage(){
+ document.documentElement.lang=lang;
+ document.querySelectorAll("[data-i18n]").forEach(el=>{const key=el.dataset.i18n;el.textContent=t(key)});
+ $("langBtn").textContent=lang==="uz"?"EN":"UZ";
+ $("searchInput").placeholder=t("search");
+ renderFilters();renderManga();
 }
-
-function scrollGenres(){
-document.getElementById("genres").scrollIntoView({behavior:"smooth"});
-}
-
-function goHome(){
-favoriteMode=false;
-genre="all";
-document.getElementById("search").value="";
-document.querySelectorAll(".filter").forEach((b,i)=>b.classList.toggle("active",i===0));
-render();
-window.scrollTo({top:0,behavior:"smooth"});
-}
-
-// FILTER
-
-function setGenre(value,button){
-genre=value;
-favoriteMode=false;
-document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));
-button.classList.add("active");
-render();
-}
-
-function showFavorites(){
-favoriteMode=true;
-genre="all";
-render();
-scrollManga();
-}
-
-// MANGA CARDS
-
-function render(){
-const query=document.getElementById("search").value.toLowerCase();
-
-let list=mangas.filter(m=>{
-return (genre==="all"||m.genre===genre)
-&&m.name.toLowerCase().includes(query)
-&&(!favoriteMode||favorites.includes(m.id));
-});
-
-document.getElementById("sectionTitle").textContent=
-favoriteMode?t("favTitle"):t("popular");
-
-const grid=document.getElementById("grid");
-
-if(!list.length){
-grid.innerHTML=`<p class="empty">${favoriteMode?t("emptyFav"):t("empty")}</p>`;
-return;
-}
-
-grid.innerHTML=list.map(m=>`
-<div class="card">
-<button class="heart ${favorites.includes(m.id)?"active":""}"
-onclick="toggleFavorite(${m.id})">
-${favorites.includes(m.id)?"♥":"♡"}
-</button>
-
-<div class="cover ${m.color}">
-${m.cover?`<img src="${escapeHTML(m.cover)}" alt="${escapeHTML(m.name)}">`:""}
-<span>${escapeHTML(m.name)}</span>
-</div>
-
-<div class="card-info">
-<h3>${escapeHTML(m.name)}</h3>
-<p>${escapeHTML(m.genre)}</p>
-<button class="details" onclick="details(${m.id})">${t("details")}</button>
-</div>
-</div>
-`).join("");
-}
-
-function escapeHTML(value){
-return String(value??"").replace(/[&<>"']/g,c=>({
-"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-}[c]));
-}
-
-function toggleFavorite(id){
-favorites=favorites.includes(id)
-?favorites.filter(x=>x!==id)
-:[...favorites,id];
-save();
-render();
-}
-
-// DETAILS
-
-function details(id){
-const m=mangas.find(x=>x.id===id);
-if(!m)return;
-
-currentManga=m;
-
-document.getElementById("modalBody").innerHTML=`
-<h2>${escapeHTML(m.name)}</h2>
-<div class="cover ${m.color}" style="border-radius:10px">
-${m.cover?`<img src="${escapeHTML(m.cover)}">`:""}
-<span>${escapeHTML(m.name)}</span>
-</div>
-
-<p><b>${t("author")}:</b> ${escapeHTML(m.author)}</p>
-<p><b>${t("genres")}:</b> ${escapeHTML(m.genre)}</p>
-<p><b>${t("description")}:</b>
-${escapeHTML(lang==="uz"?m.uz:m.en)}</p>
-
-<h3>${t("chapters")}</h3>
-
-${Array.from({length:Math.max(0,Math.min(100,Number(m.chapters)||0))},(_,i)=>`
-<button class="chapter" onclick="readChapter(${m.id},${i+1})">
-${t("chapter")} ${i+1} →
-</button>
-`).join("")}
-
-<button class="primary" style="margin-top:20px" onclick="closeModal()">
-${t("close")}
-</button>
-`;
-
-openModal();
-}
-
-// READER
-
-function readChapter(id,chapter){
-currentManga=mangas.find(x=>x.id===id);
-currentChapter=chapter;
-currentPage=1;
-showReader();
-}
-
-function showReader(){
-const m=currentManga;
-if(!m)return;
-
-const pages=m.pages||[];
-const image=pages[currentPage-1];
-
-document.getElementById("modalBody").innerHTML=`
-<button class="close" onclick="details(${m.id})">←</button>
-<h2>${escapeHTML(m.name)}</h2>
-<p>${t("chapter")} ${currentChapter}</p>
-
-${image
-?`<img class="reader-image" src="${escapeHTML(image)}" alt="Manga page">`
-:`<div class="reader-placeholder">
-<div>
-<h2>${escapeHTML(m.name)}</h2>
-<p>${t("chapter")} ${currentChapter} · ${t("page")} ${currentPage}</p>
-<p>${lang==="uz"?"Bu sahifaga manga rasmini administrator paneli orqali qo'shish mumkin.":"Add a manga page image through the admin panel."}</p>
-</div>
-</div>`}
-
-<p style="text-align:center">${t("page")} ${currentPage} / ${Math.max(1,pages.length||1)}</p>
-
-<div class="reader-controls">
-<button class="primary" onclick="changePage(-1)">${t("previous")}</button>
-<button class="primary" onclick="changePage(1)">${t("next")}</button>
-</div>
-`;
-
-}
-
-function changePage(direction){
-const total=Math.max(1,currentManga.pages?.length||1);
-currentPage=Math.max(1,Math.min(total,currentPage+direction));
-showReader();
-}
-
-// ADMIN PANEL
-
-function openAdmin(){
-document.getElementById("modalBody").innerHTML=`
-<h2>⚙ MangaVerse Admin</h2>
-<p>${lang==="uz"?"Yangi manga qo'shish":"Add a new manga"}</p>
-
-<div class="admin-form">
-<label>Manga nomi / Manga name</label>
-<input id="newName" placeholder="Manga name">
-
-<label>Muallif / Author</label>
-<input id="newAuthor" placeholder="Author">
-
-<label>Janr / Genre</label>
-<select id="newGenre">
-<option>Action</option>
-<option>Fantasy</option>
-<option>Romance</option>
-<option>Adventure</option>
-<option>Mystery</option>
-</select>
-
-<label>Muqova rasmi URL / Cover image URL</label>
-<input id="newCover" placeholder="https://example.com/cover.jpg">
-
-<label>Qismlar soni / Number of chapters</label>
-<input id="newChapters" type="number" min="1" value="1">
-
-<label>O'zbekcha tavsif</label>
-<textarea id="newUz" placeholder="Manga haqida..."></textarea>
-
-<label>English description</label>
-<textarea id="newEn" placeholder="About this manga..."></textarea>
-
-<label>Manga sahifalari rasmlari URL manzillari
-(vergul bilan ajrating)</label>
-<textarea id="newPages" placeholder="https://example.com/page1.jpg, https://example.com/page2.jpg"></textarea>
-
-<button class="primary" onclick="addManga()">+ Manga qo'shish</button>
-</div>
-
-<h3 style="margin-top:25px">Mavjud mangalar</h3>
-<div id="adminList"></div>
-`;
-
-openModal();
-adminList();
-}
-
-function addManga(){
-const name=document.getElementById("newName").value.trim();
-const author=document.getElementById("newAuthor").value.trim();
-
-if(!name||!author){
-alert("Manga nomi va muallifini kiriting!");
-return;
-}
-
-const pages=document.getElementById("newPages").value
-.split(",").map(x=>x.trim()).filter(Boolean);
-
-const colors=["purple","blue","orange","red","green","pink","gray"];
-
-mangas.push({
-id:Date.now(),
-name,
-author,
-genre:document.getElementById("newGenre").value,
-cover:document.getElementById("newCover").value.trim(),
-chapters:Math.max(1,Number(document.getElementById("newChapters").value)||1),
-uz:document.getElementById("newUz").value,
-en:document.getElementById("newEn").value,
-pages,
-color:colors[mangas.length%colors.length]
-});
-
-save();
-render();
-openAdmin();
-alert("Manga qo'shildi!");
-}
-
-function adminList(){
-const el=document.getElementById("adminList");
-if(!el)return;
-
-el.innerHTML=mangas.map(m=>`
-<div class="chapter">
-${escapeHTML(m.name)}
-<button style="float:right;color:#ff4167;background:none"
-onclick="deleteManga(${m.id})">O'chirish ✕</button>
-</div>
-`).join("");
-}
-
-function deleteManga(id){
-if(!confirm("Bu mangani o'chirmoqchimisiz?"))return;
-
-mangas=mangas.filter(m=>m.id!==id);
-favorites=favorites.filter(x=>x!==id);
-save();
-render();
-adminList();
-}
-
-// MODAL
-
-function openModal(){
-document.getElementById("modal").style.display="flex";
-}
-
-function closeModal(){
-document.getElementById("modal").style.display="none";
-}
-
-function outsideClose(event){
-if(event.target.id==="modal")closeModal();
-}
-
-document.addEventListener("keydown",e=>{
-if(e.key==="Escape")closeModal();
-});
-
-render();
-
+function escapeHTML(value){return String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function escapeAttr(value){return escapeHTML(value)}
+applyLanguage();
 </script>
 </body>
 </html>
