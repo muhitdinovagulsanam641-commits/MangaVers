@@ -4,160 +4,423 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MangaVerse | Manga World</title>
+<title>MangaVerse</title>
+
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{
- background:#090b14;color:white;
- font-family:Arial,sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-header{
- padding:22px 7%;display:flex;
- justify-content:space-between;align-items:center;
- background:#111522;position:sticky;top:0;
+
+body {
+  background: #090b14;
+  color: white;
+  font-family: Arial, sans-serif;
 }
-.logo{font-size:27px;font-weight:bold;color:#ff405d}
-.logo span{color:white}
-nav a{color:white;text-decoration:none;margin-left:20px}
-.hero{
- padding:75px 8%;min-height:330px;
- background:linear-gradient(90deg,#111522,#28152d);
+
+header {
+  background: #111522;
+  padding: 22px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
-.hero h1{font-size:45px;margin-bottom:15px}
-.hero p{color:#bbb;margin-bottom:25px}
-button{
- background:#ff405d;color:white;border:0;
- padding:12px 22px;border-radius:8px;
- cursor:pointer;font-weight:bold;
+
+.logo {
+  font-size: 27px;
+  font-weight: bold;
+  color: #ff4165;
 }
-.search{padding:25px 7%}
-input{
- width:100%;padding:15px;border-radius:8px;
- border:1px solid #333;background:#171c2a;
- color:white;font-size:16px;
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin-left: 22px;
 }
-section{padding:15px 7% 40px}
-h2{margin-bottom:22px}
-.genres button{margin:0 7px 10px 0}
-.grid{
- display:grid;grid-template-columns:
- repeat(auto-fit,minmax(160px,1fr));gap:20px;
+
+nav a:hover {
+  color: #ff4165;
 }
-.card{
- background:#151a28;border-radius:12px;
- overflow:hidden;transition:.3s;
+
+.hero {
+  padding: 75px 5%;
+  background: linear-gradient(120deg,#21162e,#151b30);
 }
-.card:hover{transform:translateY(-7px)}
-.card img{width:100%;height:230px;object-fit:cover}
-.info{padding:13px}
-.info h3{font-size:17px;margin-bottom:8px}
-.info p{font-size:13px;color:#aaa;margin-bottom:10px}
-.fav{background:#292f40;padding:8px 12px}
-footer{text-align:center;padding:30px;color:#888}
+
+.hero h1 {
+  font-size: 40px;
+  margin-bottom: 15px;
+}
+
+.hero p {
+  color: #c5c5d1;
+  margin-bottom: 25px;
+}
+
+button {
+  background: #ff4165;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 9px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  background: #e92d52;
+}
+
+main {
+  padding: 30px 5%;
+}
+
+.search {
+  width: 100%;
+  padding: 16px;
+  background: #171d2b;
+  border: 1px solid #353b4b;
+  border-radius: 10px;
+  color: white;
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+h2 {
+  margin: 25px 0 20px;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.filters button {
+  background: #242b3d;
+}
+
+.filters button.active {
+  background: #ff4165;
+}
+
+.manga-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(170px,1fr));
+  gap: 20px;
+}
+
+.card {
+  background: #171d2b;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: .25s;
+  position: relative;
+}
+
+.card:hover {
+  transform: translateY(-7px);
+}
+
+.cover {
+  height: 240px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 15px;
+  font-size: 25px;
+  font-weight: bold;
+  background: linear-gradient(145deg,#34235f,#171d2b);
+}
+
+.card:nth-child(2) .cover {
+  background: linear-gradient(145deg,#225b77,#101d32);
+}
+
+.card:nth-child(3) .cover {
+  background: linear-gradient(145deg,#a55324,#34202b);
+}
+
+.card:nth-child(4) .cover {
+  background: linear-gradient(145deg,#514c40,#151522);
+}
+
+.card:nth-child(5) .cover {
+  background: linear-gradient(145deg,#793449,#20152c);
+}
+
+.card:nth-child(6) .cover {
+  background: linear-gradient(145deg,#456b8b,#151d35);
+}
+
+.card-info {
+  padding: 15px;
+}
+
+.card-info p {
+  color: #a8adbb;
+  margin-top: 8px;
+  font-size: 13px;
+}
+
+.favorite {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #111522;
+  padding: 8px;
+  border-radius: 50%;
+  font-size: 19px;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: #000c;
+  z-index: 20;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.modal-content {
+  background: #171d2b;
+  padding: 30px;
+  border-radius: 15px;
+  max-width: 450px;
+  width: 100%;
+}
+
+.modal-content h2 {
+  color: #ff4165;
+}
+
+.modal-content p {
+  color: #c5c5d1;
+  line-height: 1.7;
+  margin: 15px 0;
+}
+
+footer {
+  text-align: center;
+  padding: 30px;
+  color: #888;
+}
+
+@media(max-width:600px) {
+  header {
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  nav a {
+    margin: 0 8px;
+    font-size: 14px;
+  }
+
+  .hero h1 {
+    font-size: 29px;
+  }
+
+  .manga-list {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 12px;
+  }
+
+  .cover {
+    height: 190px;
+    font-size: 20px;
+  }
+}
 </style>
 </head>
+
 <body>
 
 <header>
- <div class="logo">Manga<span>Verse.</span></div>
- <nav>
-  <a href="#">Bosh sahifa</a>
-  <a href="#manga">Manga</a>
-  <a href="#genres">Janrlar</a>
- </nav>
+  <div class="logo">MangaVerse.</div>
+  <nav>
+    <a href="#">Bosh sahifa</a>
+    <a href="#manga">Manga</a>
+    <a href="#genres">Janrlar</a>
+    <a href="#favorites">Sevimlilar</a>
+  </nav>
 </header>
 
-<div class="hero">
- <h1>Manga olamiga xush kelibsiz!</h1>
- <p>Eng yaxshi mangalarni bir joyda kashf eting.</p>
- <a href="#manga"><button>Manga ko'rish →</button></a>
-</div>
-
-<div class="search">
- <input id="search" placeholder="🔎 Manga qidirish..." oninput="render()">
-</div>
-
-<section id="genres">
- <h2>Janrlar</h2>
- <div class="genres">
-  <button onclick="filter('all')">Barchasi</button>
-  <button onclick="filter('Action')">Action</button>
-  <button onclick="filter('Fantasy')">Fantasy</button>
-  <button onclick="filter('Romance')">Romance</button>
-  <button onclick="filter('Adventure')">Adventure</button>
- </div>
+<section class="hero">
+  <h1>Manga olamiga xush kelibsiz!</h1>
+  <p>Eng yaxshi mangalarni bir joyda kashf eting.</p>
+  <button onclick="document.getElementById('manga').scrollIntoView()">
+    Manga ko'rish →
+  </button>
 </section>
 
-<section id="manga">
- <h2>🔥 Mashhur mangalar</h2>
- <div class="grid" id="grid"></div>
-</section>
+<main>
+  <input class="search" id="search"
+  placeholder="🔎 Manga qidirish..."
+  oninput="renderManga()">
 
-<footer>© 2026 MangaVerse | Created with ❤️</footer>
+  <h2 id="genres">Janrlar</h2>
+
+  <div class="filters">
+    <button class="active" onclick="filterGenre('Barchasi',this)">Barchasi</button>
+    <button onclick="filterGenre('Action',this)">Action</button>
+    <button onclick="filterGenre('Fantasy',this)">Fantasy</button>
+    <button onclick="filterGenre('Romance',this)">Romance</button>
+    <button onclick="filterGenre('Adventure',this)">Adventure</button>
+  </div>
+
+  <h2 id="manga">🔥 Mashhur mangalar</h2>
+  <div class="manga-list" id="mangaList"></div>
+
+  <h2 id="favorites">❤️ Sevimli mangalar</h2>
+  <div class="manga-list" id="favoriteList"></div>
+</main>
+
+<div class="modal" id="modal" onclick="closeModal(event)">
+  <div class="modal-content">
+    <h2 id="modalTitle"></h2>
+    <p id="modalDescription"></p>
+    <p id="modalGenre"></p>
+    <p id="modalStatus"></p>
+    <button onclick="document.getElementById('modal').style.display='none'">
+      Yopish
+    </button>
+  </div>
+</div>
+
+<footer>
+  © 2026 MangaVerse. All rights reserved.
+</footer>
 
 <script>
-const mangas=[
- {name:"Solo Leveling",genre:"Action",rating:"9.8",
- img:"https://placehold.co/400x550/25204b/fff?text=Solo+Leveling"},
- {name:"One Piece",genre:"Adventure",rating:"9.9",
- img:"https://placehold.co/400x550/274b65/fff?text=One+Piece"},
- {name:"Naruto",genre:"Action",rating:"9.5",
- img:"https://placehold.co/400x550/9b5729/fff?text=Naruto"},
- {name:"Attack on Titan",genre:"Action",rating:"9.7",
- img:"https://placehold.co/400x550/46433b/fff?text=Attack+on+Titan"},
- {name:"Demon Slayer",genre:"Fantasy",rating:"9.6",
- img:"https://placehold.co/400x550/5a2838/fff?text=Demon+Slayer"},
- {name:"Your Name",genre:"Romance",rating:"9.4",
- img:"https://placehold.co/400x550/42617b/fff?text=Your+Name"}
+const mangas = [
+  {
+    name:"Solo Leveling",
+    genre:"Action",
+    status:"Tugallangan",
+    description:"Oddiy ovchidan dunyodagi eng kuchli jangchiga aylangan Sung Jin-Woo haqida hikoya."
+  },
+  {
+    name:"One Piece",
+    genre:"Adventure",
+    status:"Davom etmoqda",
+    description:"Luffy va uning do'stlari buyuk xazinani izlab dengizlar bo'ylab sayohat qiladi."
+  },
+  {
+    name:"Naruto",
+    genre:"Action",
+    status:"Tugallangan",
+    description:"Naruto ismli yosh ninja o'z orzusi sari intiladi."
+  },
+  {
+    name:"Attack on Titan",
+    genre:"Action",
+    status:"Tugallangan",
+    description:"Insoniyat devorlar ortida yashaydigan sirli va xavfli dunyo."
+  },
+  {
+    name:"Demon Slayer",
+    genre:"Fantasy",
+    status:"Tugallangan",
+    description:"Tanjiro oilasini himoya qilish va singlisini qutqarish uchun kurashadi."
+  },
+  {
+    name:"Your Name",
+    genre:"Romance",
+    status:"Tugallangan",
+    description:"Taqdir orqali bir-biriga bog'langan ikki yoshning ajoyib hikoyasi."
+  }
 ];
 
-let selected="all";
-let favorites=[];
+let selectedGenre = "Barchasi";
+let favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
 
-function filter(genre){
- selected=genre;
- render();
+function renderManga() {
+  const query = document.getElementById("search").value.toLowerCase();
+
+  const filtered = mangas.filter(m => {
+    return m.name.toLowerCase().includes(query) &&
+    (selectedGenre === "Barchasi" || m.genre === selectedGenre);
+  });
+
+  document.getElementById("mangaList").innerHTML =
+    filtered.map(m => `
+      <div class="card" onclick="showDetails('${m.name}')">
+        <div class="cover">${m.name}</div>
+        <span class="favorite"
+          onclick="toggleFavorite(event,'${m.name}')">
+          ${favorites.includes(m.name) ? "❤️" : "♡"}
+        </span>
+        <div class="card-info">
+          <h3>${m.name}</h3>
+          <p>${m.genre}</p>
+        </div>
+      </div>
+    `).join("") || "<p>Manga topilmadi.</p>";
+
+  const saved = mangas.filter(m => favorites.includes(m.name));
+
+  document.getElementById("favoriteList").innerHTML =
+    saved.map(m => `
+      <div class="card" onclick="showDetails('${m.name}')">
+        <div class="cover">${m.name}</div>
+        <div class="card-info">
+          <h3>${m.name}</h3>
+          <p>${m.genre}</p>
+        </div>
+      </div>
+    `).join("") || "<p>Hozircha sevimli mangalar yo'q.</p>";
 }
 
-function render(){
- const query=document.getElementById("search").value.toLowerCase();
- const grid=document.getElementById("grid");
- grid.innerHTML="";
+function filterGenre(genre,button) {
+  selectedGenre = genre;
 
- const result=mangas.filter(m=>
-  m.name.toLowerCase().includes(query) &&
-  (selected==="all"||m.genre===selected)
- );
+  document.querySelectorAll(".filters button")
+    .forEach(b => b.classList.remove("active"));
 
- result.forEach(m=>{
-  const card=document.createElement("div");
-  card.className="card";
-  const img=document.createElement("img");
-  img.src=m.img;
-  img.alt=m.name;
-  const info=document.createElement("div");
-  info.className="info";
-  const title=document.createElement("h3");
-  title.textContent=m.name;
-  const desc=document.createElement("p");
-  desc.textContent=m.genre+" • ⭐ "+m.rating;
-  const btn=document.createElement("button");
-  btn.className="fav";
-  btn.textContent=favorites.includes(m.name)?"❤️ Sevimli":"🤍 Sevimliga";
-  btn.onclick=()=>{
-   favorites=favorites.includes(m.name)
-    ?favorites.filter(x=>x!==m.name)
-    :[...favorites,m.name];
-   render();
-  };
-  info.append(title,desc,btn);
-  card.append(img,info);
-  grid.append(card);
- });
- if(!result.length)grid.textContent="Manga topilmadi!";
+  button.classList.add("active");
+  renderManga();
 }
 
-render();
+function showDetails(name) {
+  const manga = mangas.find(m => m.name === name);
+
+  document.getElementById("modalTitle").textContent = manga.name;
+  document.getElementById("modalDescription").textContent = manga.description;
+  document.getElementById("modalGenre").textContent = "Janr: " + manga.genre;
+  document.getElementById("modalStatus").textContent = "Holati: " + manga.status;
+  document.getElementById("modal").style.display = "flex";
+}
+
+function closeModal(event) {
+  if(event.target.id === "modal") {
+    document.getElementById("modal").style.display = "none";
+  }
+}
+
+function toggleFavorite(event,name) {
+  event.stopPropagation();
+
+  if(favorites.includes(name)) {
+    favorites = favorites.filter(item => item !== name);
+  } else {
+    favorites.push(name);
+  }
+
+  localStorage.setItem("favorites",JSON.stringify(favorites));
+  renderManga();
+}
+
+renderManga();
 </script>
+
 </body>
 </html>
