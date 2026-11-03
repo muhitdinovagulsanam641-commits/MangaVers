@@ -8,281 +8,293 @@
 
 <style>
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  background: #090b14;
-  color: white;
-  font-family: Arial, sans-serif;
+    background: #090b14;
+    color: white;
+    font-family: Arial, sans-serif;
 }
 
 header {
-  background: #111522;
-  padding: 18px 4%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 15px;
-  position: sticky;
-  top: 0;
-  z-index: 10;
+    background: #111522;
+    padding: 20px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
 .logo {
-  font-size: 27px;
-  font-weight: bold;
-  color: #ff4165;
+    font-size: 27px;
+    font-weight: bold;
+    color: #ff3d65;
 }
 
 nav {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  flex-wrap: wrap;
+    display: flex;
+    gap: 22px;
+    align-items: center;
 }
 
 nav a {
-  color: white;
-  text-decoration: none;
-  font-size: 15px;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 nav a:hover {
-  color: #ff4165;
+    color: #ff3d65;
 }
 
-button {
-  border: none;
-  cursor: pointer;
-  border-radius: 9px;
-  padding: 11px 17px;
-  font-weight: bold;
-  color: white;
-  background: #ff4165;
-  transition: .2s;
-}
-
-button:hover {
-  background: #e52e54;
-  transform: translateY(-2px);
-}
-
-.language {
-  background: #292f40;
-  border: 1px solid #454c60;
+.lang {
+    background: #ff3d65;
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
 }
 
 .hero {
-  padding: 85px 5%;
-  background: linear-gradient(120deg,#25162f,#151d36);
+    padding: 85px 5%;
+    background: linear-gradient(120deg,#21152d,#151e39);
 }
 
 .hero h1 {
-  font-size: 42px;
-  margin-bottom: 15px;
+    font-size: 42px;
+    margin-bottom: 15px;
 }
 
 .hero p {
-  color: #c4c7d4;
-  font-size: 17px;
-  margin-bottom: 25px;
+    color: #c5c5d0;
+    margin-bottom: 25px;
 }
 
-main {
-  padding: 30px 4%;
+button {
+    cursor: pointer;
+    border: none;
+}
+
+.main-btn {
+    background: #ff3d65;
+    color: white;
+    padding: 14px 22px;
+    border-radius: 9px;
+    font-weight: bold;
+}
+
+.main-btn:hover {
+    background: #e52c54;
+}
+
+.container {
+    padding: 30px 5%;
 }
 
 .search {
-  width: 100%;
-  padding: 17px;
-  border-radius: 10px;
-  background: #171d2b;
-  color: white;
-  border: 1px solid #353d50;
-  font-size: 16px;
-  outline: none;
-  margin-bottom: 30px;
-}
-
-.search:focus {
-  border-color: #ff4165;
+    width: 100%;
+    padding: 16px;
+    background: #191f30;
+    border: 1px solid #343b4e;
+    border-radius: 10px;
+    color: white;
+    font-size: 16px;
+    margin-bottom: 30px;
 }
 
 h2 {
-  margin: 25px 0 20px;
-  font-size: 23px;
+    margin: 25px 0 20px;
 }
 
 .filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 30px;
 }
 
-.filters button {
-  background: #252d40;
+.filter {
+    padding: 12px 20px;
+    background: #252d40;
+    color: white;
+    border-radius: 8px;
 }
 
-.filters button.active {
-  background: #ff4165;
+.filter.active,
+.filter:hover {
+    background: #ff3d65;
 }
 
-.manga-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(175px,1fr));
-  gap: 20px;
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(190px,1fr));
+    gap: 20px;
 }
 
 .card {
-  background: #171d2b;
-  border-radius: 12px;
-  overflow: hidden;
-  position: relative;
-  cursor: pointer;
-  transition: .25s;
+    background: #191f30;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: .3s;
+    position: relative;
 }
 
 .card:hover {
-  transform: translateY(-6px);
+    transform: translateY(-6px);
 }
 
 .cover {
-  height: 250px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 18px;
-  font-size: 26px;
-  font-weight: bold;
-  background: linear-gradient(145deg,#38245f,#171d2b);
+    height: 230px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 15px;
+    font-size: 25px;
+    font-weight: bold;
+    background: linear-gradient(135deg,#38235d,#171b35);
 }
 
-.card:nth-child(6n+2) .cover {
-  background: linear-gradient(145deg,#225b77,#101d32);
+.cover.blue {
+    background: linear-gradient(135deg,#20617b,#15263d);
 }
 
-.card:nth-child(6n+3) .cover {
-  background: linear-gradient(145deg,#a55324,#34202b);
+.cover.orange {
+    background: linear-gradient(135deg,#a65325,#3b2024);
 }
 
-.card:nth-child(6n+4) .cover {
-  background: linear-gradient(145deg,#514c40,#151522);
+.cover.red {
+    background: linear-gradient(135deg,#77304e,#21172c);
 }
 
-.card:nth-child(6n+5) .cover {
-  background: linear-gradient(145deg,#793449,#20152c);
+.cover.gray {
+    background: linear-gradient(135deg,#555044,#171923);
 }
 
-.card:nth-child(6n+6) .cover {
-  background: linear-gradient(145deg,#456b8b,#151d35);
+.cover.green {
+    background: linear-gradient(135deg,#236b55,#152b32);
 }
 
 .card-info {
-  padding: 15px;
+    padding: 15px;
+}
+
+.card-info h3 {
+    margin-bottom: 8px;
 }
 
 .card-info p {
-  color: #aab2c5;
-  font-size: 13px;
-  margin-top: 8px;
+    color: #aeb6c8;
+    font-size: 13px;
 }
 
-.favorite {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: #101522;
-  border-radius: 50%;
-  width: 39px;
-  height: 39px;
-  font-size: 20px;
-  padding: 0;
+.heart {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #090b14;
+    color: white;
+    font-size: 21px;
 }
 
-.favorite:hover {
-  background: #30384c;
+.heart.active {
+    color: #ff315b;
 }
 
-.empty {
-  color: #aab2c5;
-  padding: 15px 0;
+.details-btn {
+    width: 100%;
+    margin-top: 13px;
+    padding: 10px;
+    background: #ff3d65;
+    color: white;
+    border-radius: 7px;
 }
 
 .modal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: #000c;
-  z-index: 30;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: #000c;
+    z-index: 30;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 }
 
 .modal-content {
-  background: #171d2b;
-  border: 1px solid #353d50;
-  padding: 30px;
-  border-radius: 15px;
-  max-width: 460px;
-  width: 100%;
+    background: #171d2c;
+    padding: 25px;
+    border-radius: 15px;
+    max-width: 500px;
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
 }
 
-.modal-content h2 {
-  color: #ff4165;
-  margin-top: 0;
+.close {
+    float: right;
+    color: #ff5575;
+    font-size: 25px;
+    background: none;
 }
 
 .modal-content p {
-  color: #c5cbd8;
-  line-height: 1.7;
-  margin: 15px 0;
+    color: #c2c7d3;
+    line-height: 1.7;
+    margin: 15px 0;
 }
 
-.close-button {
-  margin-top: 10px;
+.modal-content h3 {
+    margin-top: 18px;
+}
+
+.chapter {
+    background: #252d40;
+    padding: 12px;
+    margin-top: 8px;
+    border-radius: 7px;
 }
 
 footer {
-  text-align: center;
-  padding: 35px;
-  color: #9299a9;
-  background: #111522;
-  margin-top: 40px;
+    text-align: center;
+    padding: 35px;
+    background: #111522;
+    color: #aeb6c8;
+    margin-top: 50px;
 }
 
-@media(max-width:600px) {
-  header {
-    justify-content: center;
-  }
+.empty {
+    color: #aeb6c8;
+    padding: 20px 0;
+}
 
-  nav {
-    justify-content: center;
-    gap: 13px;
-  }
+@media(max-width:650px) {
+    header {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
 
-  .hero {
-    padding: 60px 5%;
-  }
+    nav {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
 
-  .hero h1 {
-    font-size: 29px;
-  }
+    .hero h1 {
+        font-size: 30px;
+    }
 
-  .manga-list {
-    grid-template-columns: repeat(2,minmax(0,1fr));
-    gap: 12px;
-  }
-
-  .cover {
-    height: 190px;
-    font-size: 20px;
-  }
+    .cover {
+        height: 200px;
+    }
 }
 </style>
 </head>
@@ -290,351 +302,364 @@ footer {
 <body>
 
 <header>
-  <div class="logo">MangaVerse.</div>
+    <div class="logo">MangaVerse.</div>
 
-  <nav>
-    <a href="#home" data-i18n="home">Bosh sahifa</a>
-    <a href="#manga" data-i18n="manga">Manga</a>
-    <a href="#genres" data-i18n="genres">Janrlar</a>
-    <a href="#favorites" data-i18n="favorites">Sevimlilar</a>
-    <button class="language" id="languageBtn">EN</button>
-  </nav>
+    <nav>
+        <a onclick="goHome()" data-i="home">Bosh sahifa</a>
+        <a href="#mangas" data-i="manga">Manga</a>
+        <a href="#genres" data-i="genres">Janrlar</a>
+        <a onclick="showFavorites()" data-i="favorites">Sevimlilar</a>
+        <button class="lang" onclick="changeLang()">EN</button>
+    </nav>
 </header>
 
 <section class="hero" id="home">
-  <h1 data-i18n="welcome">Manga olamiga xush kelibsiz!</h1>
-  <p data-i18n="subtitle">
-    Eng yaxshi mangalarni bir joyda kashf eting.
-  </p>
-  <button onclick="document.getElementById('manga').scrollIntoView()"
-  data-i18n="explore">Manga ko‘rish →</button>
+    <h1 data-i="welcome">Manga olamiga xush kelibsiz!</h1>
+    <p data-i="subtitle">Eng yaxshi mangalarni bir joyda kashf eting.</p>
+    <button class="main-btn" onclick="scrollToManga()" data-i="explore">
+        Manga ko'rish →
+    </button>
 </section>
 
-<main>
+<main class="container" id="mangas">
 
-<input
-  class="search"
-  id="search"
-  placeholder="🔎 Manga qidirish..."
->
+    <input class="search" id="search"
+    placeholder="🔎 Manga qidirish..."
+    oninput="renderMangas()">
 
-<h2 id="genres" data-i18n="genres">Janrlar</h2>
+    <h2 data-i="genres">Janrlar</h2>
 
-<div class="filters" id="filters">
-  <button class="active" data-genre="all">Barchasi</button>
-  <button data-genre="Action">Action</button>
-  <button data-genre="Fantasy">Fantasy</button>
-  <button data-genre="Romance">Romance</button>
-  <button data-genre="Adventure">Adventure</button>
-</div>
+    <div class="filters" id="genres">
+        <button class="filter active" onclick="setGenre('all',this)" data-i="all">Barchasi</button>
+        <button class="filter" onclick="setGenre('Action',this)">Action</button>
+        <button class="filter" onclick="setGenre('Fantasy',this)">Fantasy</button>
+        <button class="filter" onclick="setGenre('Romance',this)">Romance</button>
+        <button class="filter" onclick="setGenre('Adventure',this)">Adventure</button>
+        <button class="filter" onclick="setGenre('Mystery',this)">Mystery</button>
+    </div>
 
-<h2 id="manga" data-i18n="popular">🔥 Mashhur mangalar</h2>
-<div class="manga-list" id="mangaList"></div>
+    <h2 id="sectionTitle">🔥 Mashhur mangalar</h2>
 
-<h2 id="favorites" data-i18n="favoritesTitle">
-  ❤️ Sevimli mangalar
-</h2>
-<div class="manga-list" id="favoriteList"></div>
+    <div class="grid" id="mangaGrid"></div>
 
 </main>
 
-<div class="modal" id="modal">
-  <div class="modal-content">
-    <h2 id="modalTitle"></h2>
-    <p id="modalDescription"></p>
-    <p id="modalGenre"></p>
-    <p id="modalStatus"></p>
-    <button class="close-button" id="closeModal"
-    data-i18n="close">Yopish</button>
-  </div>
+<div class="modal" id="modal" onclick="closeOutside(event)">
+    <div class="modal-content">
+        <button class="close" onclick="closeModal()">×</button>
+        <div id="modalBody"></div>
+    </div>
 </div>
 
 <footer>
-  © 2026 MangaVerse. All rights reserved.
+    <h2>MangaVerse.</h2>
+    <p>© 2026 MangaVerse | All rights reserved.</p>
+    <p data-i="footer">Manga olamini biz bilan kashf eting!</p>
 </footer>
 
 <script>
+
 const mangas = [
-  {
-    id: 1,
-    name: "Solo Leveling",
-    genre: "Action",
-    status: "Tugallangan",
-    statusEn: "Completed",
-    description: "Oddiy ovchi Sung Jin-Woo kuchli jangchiga aylanish yo‘lida ko‘plab sinovlardan o‘tadi.",
-    descriptionEn: "Hunter Sung Jin-Woo faces many challenges on his journey to becoming a powerful hunter."
-  },
-  {
-    id: 2,
-    name: "One Piece",
-    genre: "Adventure",
-    status: "Davom etmoqda",
-    statusEn: "Ongoing",
-    description: "Luffy va uning do‘stlari buyuk xazinani izlab dengizlar bo‘ylab sayohat qiladi.",
-    descriptionEn: "Luffy and his friends travel across the seas in search of a legendary treasure."
-  },
-  {
-    id: 3,
-    name: "Naruto",
-    genre: "Action",
-    status: "Tugallangan",
-    statusEn: "Completed",
-    description: "Naruto ismli yosh ninja o‘z orzusi sari intilib, do‘stlik va jasoratni o‘rganadi.",
-    descriptionEn: "A young ninja named Naruto follows his dream and learns about friendship and courage."
-  },
-  {
-    id: 4,
-    name: "Attack on Titan",
-    genre: "Action",
-    status: "Tugallangan",
-    statusEn: "Completed",
-    description: "Insoniyat sirli devorlar ortida yashaydigan hayajonli sarguzasht.",
-    descriptionEn: "An exciting story about humanity living behind mysterious walls."
-  },
-  {
-    id: 5,
-    name: "Demon Slayer",
-    genre: "Fantasy",
-    status: "Tugallangan",
-    statusEn: "Completed",
-    description: "Tanjiro oilasini himoya qilish va singlisiga yordam berish uchun safarga chiqadi.",
-    descriptionEn: "Tanjiro begins a journey to protect his family and help his sister."
-  },
-  {
-    id: 6,
-    name: "Your Name",
-    genre: "Romance",
-    status: "Tugallangan",
-    statusEn: "Completed",
-    description: "Taqdir orqali bir-biriga bog‘langan ikki yoshning sirli hikoyasi.",
-    descriptionEn: "A mysterious story about two young people connected by fate."
-  }
+{
+id:1,
+name:"Solo Leveling",
+genre:"Action",
+author:"Chugong",
+color:"",
+chapters:10,
+uz:"Oddiy ovchi Sung Jin-Woo kutilmagan voqealardan so'ng kuchli qahramonga aylanadi.",
+en:"An ordinary hunter named Sung Jin-Woo becomes powerful after unexpected events."
+},
+{
+id:2,
+name:"One Piece",
+genre:"Adventure",
+author:"Eiichiro Oda",
+color:"blue",
+chapters:12,
+uz:"Luffy va uning do'stlari buyuk xazinani topish uchun dengizlarga yo'l olishadi.",
+en:"Luffy and his friends travel across the seas in search of a legendary treasure."
+},
+{
+id:3,
+name:"Naruto",
+genre:"Action",
+author:"Masashi Kishimoto",
+color:"orange",
+chapters:15,
+uz:"Naruto kuchli ninja bo'lish va o'z orzusiga erishish uchun harakat qiladi.",
+en:"Naruto works hard to become a powerful ninja and achieve his dream."
+},
+{
+id:4,
+name:"Attack on Titan",
+genre:"Action",
+author:"Hajime Isayama",
+color:"gray",
+chapters:12,
+uz:"Insoniyat sirli devorlar ortida yashaydi va katta jumboqlarga duch keladi.",
+en:"Humanity lives behind mysterious walls and faces many secrets."
+},
+{
+id:5,
+name:"Demon Slayer",
+genre:"Fantasy",
+author:"Koyoharu Gotouge",
+color:"red",
+chapters:10,
+uz:"Tanjiro oilasini himoya qilish va singlisiga yordam berish uchun safarga chiqadi.",
+en:"Tanjiro begins a journey to protect his family and help his sister."
+},
+{
+id:6,
+name:"Your Name",
+genre:"Romance",
+author:"Makoto Shinkai",
+color:"blue",
+chapters:8,
+uz:"Ikki yosh inson sirli tarzda bir-birining hayotiga bog'lanib qoladi.",
+en:"Two young people become mysteriously connected to each other's lives."
+},
+{
+id:7,
+name:"Spy x Family",
+genre:"Adventure",
+author:"Tatsuya Endo",
+color:"green",
+chapters:9,
+uz:"G'ayrioddiy oila a'zolari o'z sirlarini yashirgan holda birga yashashadi.",
+en:"An unusual family lives together while keeping their secrets."
+},
+{
+id:8,
+name:"Death Note",
+genre:"Mystery",
+author:"Tsugumi Ohba",
+color:"gray",
+chapters:11,
+uz:"Sirli daftar topgan o'quvchi murakkab voqealar markaziga tushib qoladi.",
+en:"A student finds a mysterious notebook and becomes involved in complex events."
+},
+{
+id:9,
+name:"Haikyuu!!",
+genre:"Adventure",
+author:"Haruichi Furudate",
+color:"orange",
+chapters:10,
+uz:"Yosh voleybolchilar o'z orzulariga erishish uchun birgalikda mashq qilishadi.",
+en:"Young volleyball players train together to achieve their dreams."
+},
+{
+id:10,
+name:"Dr. Stone",
+genre:"Fantasy",
+author:"Riichiro Inagaki",
+color:"green",
+chapters:8,
+uz:"Senku ilm-fan yordamida insoniyatni qayta tiklashga harakat qiladi.",
+en:"Senku uses science to help rebuild human civilization."
+}
 ];
 
 const translations = {
-  uz: {
-    home: "Bosh sahifa",
-    manga: "Manga",
-    genres: "Janrlar",
-    favorites: "Sevimlilar",
-    welcome: "Manga olamiga xush kelibsiz!",
-    subtitle: "Eng yaxshi mangalarni bir joyda kashf eting.",
-    explore: "Manga ko‘rish →",
-    search: "🔎 Manga qidirish...",
-    popular: "🔥 Mashhur mangalar",
-    favoritesTitle: "❤️ Sevimli mangalar",
-    all: "Barchasi",
-    action: "Jangari",
-    fantasy: "Fantastika",
-    romance: "Romantika",
-    adventure: "Sarguzasht",
-    close: "Yopish",
-    genre: "Janr",
-    status: "Holati",
-    noResults: "Manga topilmadi.",
-    noFavorites: "Hozircha sevimli mangalar yo‘q."
-  },
-  en: {
-    home: "Home",
-    manga: "Manga",
-    genres: "Genres",
-    favorites: "Favorites",
-    welcome: "Welcome to the world of Manga!",
-    subtitle: "Discover the best manga in one place.",
-    explore: "Explore Manga →",
-    search: "🔎 Search manga...",
-    popular: "🔥 Popular Manga",
-    favoritesTitle: "❤️ Favorite Manga",
-    all: "All",
-    action: "Action",
-    fantasy: "Fantasy",
-    romance: "Romance",
-    adventure: "Adventure",
-    close: "Close",
-    genre: "Genre",
-    status: "Status",
-    noResults: "No manga found.",
-    noFavorites: "No favorite manga yet."
-  }
+uz:{
+home:"Bosh sahifa",
+manga:"Manga",
+genres:"Janrlar",
+favorites:"Sevimlilar",
+welcome:"Manga olamiga xush kelibsiz!",
+subtitle:"Eng yaxshi mangalarni bir joyda kashf eting.",
+explore:"Manga ko'rish →",
+all:"Barchasi",
+popular:"🔥 Mashhur mangalar",
+favoriteTitle:"❤️ Sevimli mangalar",
+search:"🔎 Manga qidirish...",
+author:"Muallif",
+chapters:"Qismlar",
+description:"Tavsif",
+details:"Batafsil ko'rish",
+footer:"Manga olamini biz bilan kashf eting!",
+empty:"Manga topilmadi.",
+emptyFav:"Hali sevimli manga yo'q.",
+close:"Yopish"
+},
+en:{
+home:"Home",
+manga:"Manga",
+genres:"Genres",
+favorites:"Favorites",
+welcome:"Welcome to the world of Manga!",
+subtitle:"Discover the best manga in one place.",
+explore:"Explore Manga →",
+all:"All",
+popular:"🔥 Popular Manga",
+favoriteTitle:"❤️ Favorite Manga",
+search:"🔎 Search manga...",
+author:"Author",
+chapters:"Chapters",
+description:"Description",
+details:"View details",
+footer:"Discover the world of manga with us!",
+empty:"No manga found.",
+emptyFav:"No favorite manga yet.",
+close:"Close"
+}
 };
 
-let language = localStorage.getItem("mangaLanguage") || "uz";
-let selectedGenre = "all";
-let favorites = JSON.parse(localStorage.getItem("mangaFavorites") || "[]");
+let lang="uz";
+let selectedGenre="all";
+let favorites=JSON.parse(localStorage.getItem("mangaFavorites")||"[]");
+let favoriteMode=false;
 
-function t(key) {
-  return translations[language][key];
+function t(key){
+return translations[lang][key];
 }
 
-function genreName(genre) {
-  const names = {
-    all: "all",
-    Action: "action",
-    Fantasy: "fantasy",
-    Romance: "romance",
-    Adventure: "adventure"
-  };
-  return t(names[genre]);
-}
+function changeLang(){
+lang=lang==="uz"?"en":"uz";
+document.querySelector(".lang").textContent=lang==="uz"?"EN":"UZ";
 
-function applyLanguage() {
-  document.documentElement.lang = language;
-
-  document.querySelectorAll("[data-i18n]").forEach(element => {
-    const key = element.dataset.i18n;
-    element.textContent = t(key);
-  });
-
-  document.getElementById("search").placeholder = t("search");
-
-  document.getElementById("languageBtn").textContent =
-    language === "uz" ? "EN" : "UZ";
-
-  document.querySelectorAll(".filters button").forEach(button => {
-    button.textContent = genreName(button.dataset.genre);
-    button.classList.toggle(
-      "active",
-      button.dataset.genre === selectedGenre
-    );
-  });
-
-  renderManga();
-}
-
-function createCard(manga) {
-  const card = document.createElement("div");
-  card.className = "card";
-
-  const cover = document.createElement("div");
-  cover.className = "cover";
-  cover.textContent = manga.name;
-
-  const favorite = document.createElement("button");
-  favorite.className = "favorite";
-  favorite.textContent = favorites.includes(manga.id) ? "❤️" : "♡";
-  favorite.setAttribute("aria-label", "Favorite");
-
-  favorite.addEventListener("click", event => {
-    event.stopPropagation();
-    toggleFavorite(manga.id);
-  });
-
-  const info = document.createElement("div");
-  info.className = "card-info";
-
-  const title = document.createElement("h3");
-  title.textContent = manga.name;
-
-  const genre = document.createElement("p");
-  genre.textContent = genreName(manga.genre);
-
-  info.append(title, genre);
-  card.append(cover, favorite, info);
-
-  card.addEventListener("click", () => showDetails(manga));
-
-  return card;
-}
-
-function renderManga() {
-  const query = document.getElementById("search").value
-    .trim().toLowerCase();
-
-  const filtered = mangas.filter(manga => {
-    const matchesName = manga.name.toLowerCase().includes(query);
-    const matchesGenre =
-      selectedGenre === "all" || manga.genre === selectedGenre;
-
-    return matchesName && matchesGenre;
-  });
-
-  const mangaList = document.getElementById("mangaList");
-  mangaList.replaceChildren();
-
-  filtered.forEach(manga => {
-    mangaList.appendChild(createCard(manga));
-  });
-
-  if (filtered.length === 0) {
-    const empty = document.createElement("p");
-    empty.className = "empty";
-    empty.textContent = t("noResults");
-    mangaList.appendChild(empty);
-  }
-
-  const favoriteList = document.getElementById("favoriteList");
-  favoriteList.replaceChildren();
-
-  const saved = mangas.filter(manga =>
-    favorites.includes(manga.id)
-  );
-
-  saved.forEach(manga => {
-    favoriteList.appendChild(createCard(manga));
-  });
-
-  if (saved.length === 0) {
-    const empty = document.createElement("p");
-    empty.className = "empty";
-    empty.textContent = t("noFavorites");
-    favoriteList.appendChild(empty);
-  }
-}
-
-function toggleFavorite(id) {
-  if (favorites.includes(id)) {
-    favorites = favorites.filter(item => item !== id);
-  } else {
-    favorites.push(id);
-  }
-
-  localStorage.setItem("mangaFavorites", JSON.stringify(favorites));
-  renderManga();
-}
-
-function showDetails(manga) {
-  document.getElementById("modalTitle").textContent = manga.name;
-
-  document.getElementById("modalDescription").textContent =
-    language === "uz" ? manga.description : manga.descriptionEn;
-
-  document.getElementById("modalGenre").textContent =
-    t("genre") + ": " + genreName(manga.genre);
-
-  document.getElementById("modalStatus").textContent =
-    t("status") + ": " +
-    (language === "uz" ? manga.status : manga.statusEn);
-
-  document.getElementById("modal").style.display = "flex";
-}
-
-document.getElementById("languageBtn").addEventListener("click", () => {
-  language = language === "uz" ? "en" : "uz";
-  localStorage.setItem("mangaLanguage", language);
-  applyLanguage();
+document.querySelectorAll("[data-i]").forEach(el=>{
+el.textContent=t(el.dataset.i);
 });
 
-document.getElementById("search").addEventListener("input", renderManga);
+document.getElementById("search").placeholder=t("search");
 
-document.getElementById("filters").addEventListener("click", event => {
-  const button = event.target.closest("button[data-genre]");
-  if (!button) return;
+renderMangas();
+}
 
-  selectedGenre = button.dataset.genre;
-  applyLanguage();
+function setGenre(genre,button){
+selectedGenre=genre;
+favoriteMode=false;
+
+document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));
+button.classList.add("active");
+
+renderMangas();
+}
+
+function showFavorites(){
+favoriteMode=true;
+selectedGenre="all";
+document.getElementById("sectionTitle").textContent=t("favoriteTitle");
+renderMangas();
+document.getElementById("mangas").scrollIntoView();
+}
+
+function goHome(){
+favoriteMode=false;
+selectedGenre="all";
+document.getElementById("search").value="";
+document.getElementById("sectionTitle").textContent=t("popular");
+renderMangas();
+window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function scrollToManga(){
+document.getElementById("mangas").scrollIntoView({behavior:"smooth"});
+}
+
+function toggleFavorite(id){
+if(favorites.includes(id)){
+favorites=favorites.filter(x=>x!==id);
+}else{
+favorites.push(id);
+}
+
+localStorage.setItem("mangaFavorites",JSON.stringify(favorites));
+renderMangas();
+}
+
+function renderMangas(){
+
+const query=document.getElementById("search").value.toLowerCase();
+
+let list=mangas.filter(m=>{
+const matchesGenre=selectedGenre==="all"||m.genre===selectedGenre;
+const matchesSearch=m.name.toLowerCase().includes(query);
+const matchesFavorite=!favoriteMode||favorites.includes(m.id);
+
+return matchesGenre&&matchesSearch&&matchesFavorite;
 });
 
-document.getElementById("closeModal").addEventListener("click", () => {
-  document.getElementById("modal").style.display = "none";
+const grid=document.getElementById("mangaGrid");
+
+if(list.length===0){
+grid.innerHTML=`<p class="empty">${favoriteMode?t("emptyFav"):t("empty")}</p>`;
+return;
+}
+
+grid.innerHTML=list.map(m=>`
+<div class="card">
+<button class="heart ${favorites.includes(m.id)?"active":""}"
+onclick="toggleFavorite(${m.id})">
+${favorites.includes(m.id)?"♥":"♡"}
+</button>
+
+<div class="cover ${m.color}">
+${m.name}
+</div>
+
+<div class="card-info">
+<h3>${m.name}</h3>
+<p>${m.genre}</p>
+<button class="details-btn" onclick="showDetails(${m.id})">
+${t("details")}
+</button>
+</div>
+</div>
+`).join("");
+
+if(!favoriteMode){
+document.getElementById("sectionTitle").textContent=t("popular");
+}
+}
+
+function showDetails(id){
+const m=mangas.find(x=>x.id===id);
+
+document.getElementById("modalBody").innerHTML=`
+<div class="cover ${m.color}" style="border-radius:10px;margin-bottom:20px">
+${m.name}
+</div>
+
+<h2>${m.name}</h2>
+
+<p><b>${t("author")}:</b> ${m.author}</p>
+<p><b>${t("genres")}:</b> ${m.genre}</p>
+<p><b>${t("description")}:</b>
+${lang==="uz"?m.uz:m.en}</p>
+
+<h3>${t("chapters")}</h3>
+
+${Array.from({length:m.chapters},(_,i)=>`
+<div class="chapter">
+${lang==="uz"?"Qism":"Chapter"} ${i+1}
+</div>
+`).join("")}
+
+<button class="main-btn" style="margin-top:20px"
+onclick="closeModal()">${t("close")}</button>
+`;
+
+document.getElementById("modal").style.display="flex";
+}
+
+function closeModal(){
+document.getElementById("modal").style.display="none";
+}
+
+function closeOutside(event){
+if(event.target.id==="modal")closeModal();
+}
+
+document.addEventListener("keydown",e=>{
+if(e.key==="Escape")closeModal();
 });
 
-document.getElementById("modal").addEventListener("click", event => {
-  if (event.target.id === "modal") {
-    event.currentTarget.style.display = "none";
-  }
-});
+renderMangas();
 
-applyLanguage();
 </script>
 
 </body>
